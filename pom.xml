@@ -8,10 +8,10 @@
         <version>3.3.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.example.hotel_services</groupId>
-    <artifactId>hotel_services</artifactId>
+    <groupId>com.example</groupId>
+    <artifactId>hotel-services</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Hotel Services</name>
+    <name>hotel-services</name>
     <description>Hotel Services</description>
     <url/>
     <licenses>
