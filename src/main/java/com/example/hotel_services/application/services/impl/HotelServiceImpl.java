@@ -3,6 +3,7 @@ package com.example.hotel_services.application.services.impl;
 import com.example.hotel_services.application.services.HotelService;
 import com.example.hotel_services.domain.request.HotelCreateRequest;
 import com.example.hotel_services.infrastructure.entities.Hotel;
+import com.example.hotel_services.infrastructure.repositories.HotelRedisRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class HotelServiceImpl implements HotelService {
     private final StreamBridge streamBridge;
+    private final HotelRedisRepository hotelRedisRepository;
 
     @Override
     public Mono<Long> createHotel(HotelCreateRequest request) {
@@ -24,7 +26,8 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public Mono<List<Hotel>> getHotels() {
-        return null;
+        return hotelRedisRepository.findAll()
+                .collectList();
     }
 
     private Mono<Long> publishHotel(Hotel hotelEntity) {
