@@ -31,7 +31,7 @@ spring:
                           configuration:
                             max.request.size: 1048576
                     binder:
-                      brokers: localhost:9092
+                      brokers: host.docker.internal:9092
                       autoAddPartitions: true
                       autoCreateTopics: true
                       requiredAcks: -1
