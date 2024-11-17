@@ -1,0 +1,40 @@
+spring:
+  cloud:
+    function:
+      definition: redisCacheBinding
+    stream:
+      default-binder: kafka_default
+      bindings:
+        writeCache-out-0:
+          destination: writeCache
+          binder: kafka_default
+          userNativeEncoding: true
+        redisCacheBinding-in-0:
+          destination: writeCache
+          binder: kafka_default
+          userNativeEncoding: true
+      binders:
+        kafka_default:
+          type: kafka
+          environment:
+            spring:
+              cloud:
+                stream:
+                  kafka:
+                    default:
+                      consumer:
+                        configuration:
+                          session.timeout.ms: 60000
+                          max.poll.records: 10
+                        producer:
+                          compression.type: gzip
+                          configuration:
+                            max.request.size: 1048576
+                    binder:
+                      brokers: localhost:9092
+                      autoAddPartitions: true
+                      autoCreateTopics: true
+                      requiredAcks: -1
+                      minPartitionCount: 3
+                      replicationFactor: 1
+                      serdeError: logAndContinue
