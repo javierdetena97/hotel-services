@@ -12,6 +12,7 @@ spring:
         redisCacheBinding-in-0:
           destination: writeCache
           binder: kafka_default
+          group: consumer-group-redis
           userNativeEncoding: true
       binders:
         kafka_default:
